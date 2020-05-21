@@ -2,7 +2,7 @@ const renderFilesList = (filesArr) => {
   const filesList = filesArr
     .map((fileName) => {
       const loadButton = document.createElement("button");
-      loadButton.innerHTML = fileName;
+      loadButton.innerHTML = fileName.name;
       loadButton.onclick = () => fetchAndLoadFile(fileName);
 
       const deleteButton = document.createElement("button");
@@ -26,6 +26,6 @@ const renderFilesList = (filesArr) => {
 };
 
 const loadFileToEditor = (name, text) => {
-  document.getElementById("course-name").value = name;
+  document.getElementById("course-name").value = name.name;
   document.getElementById("Course-content").value = text;
 };
