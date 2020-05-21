@@ -1,3 +1,7 @@
 body {
   background-color: peachpuff;
 }
+
+.container {
+  display: flex;
+}
