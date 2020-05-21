@@ -6,7 +6,6 @@ const Joi = require("joi");
 const util = require("util");
 
 const readFile = util.promisify(fs.readFile);
-const readDir = util.promisify(fs.readdir);
 const writeFile = util.promisify(fs.writeFile);
 
 const config = require("../config");
@@ -22,6 +21,7 @@ const controllers = {
       const json = JSON.parse(files);
       res.json({ status: "ok", courses: json });
     } catch (error) {
+      console.log(error);
       res.status(500).send("Something went wrong");
     }
   },
@@ -66,6 +66,7 @@ const controllers = {
       }
       res.json(courseFiltered);
     } catch (error) {
+      console.log(error);
       res.status(500).send("Something went wrong");
     }
   },
@@ -89,6 +90,26 @@ const controllers = {
       await writeFile(DATA_DIR, json);
 
       res.json(courseFiltered);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Something went wrong");
+    }
+  },
+  deleteCourse: async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const content = await readFile(DATA_DIR, "utf-8");
+      const courses = JSON.parse(content);
+      const courseFiltered = courses.find((course) => course.id === id);
+
+      if (courseFiltered) {
+        const index = courses.indexOf(courseFiltered);
+        const coursesSpliced = courses.splice(index, 1);
+        const newText = JSON.stringify(courses, null, "");
+        await writeFile(DATA_DIR, newText);
+        res.json(courseFiltered);
+      }
+      res.status(404).send("File not found");
     } catch (error) {
       console.log(error);
       res.status(500).send("Something went wrong");
