@@ -53,6 +53,22 @@ const controllers = {
       res.status(500).send("Something went wrong");
     }
   },
+  getCourse: async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const content = await readFile(DATA_DIR, "utf-8");
+      const courses = JSON.parse(content);
+      const courseFiltered = courses.find((course) => course.id === id);
+
+      if (!courseFiltered) {
+        res.status(404).send(`The course with the ID: ${id} is not found`);
+        return;
+      }
+      res.json(courseFiltered);
+    } catch (error) {
+      res.status(500).send("Something went wrong");
+    }
+  },
 };
 
 function validateCourse(course) {
