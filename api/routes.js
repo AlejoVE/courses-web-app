@@ -8,5 +8,6 @@ router.get("/", controllers.hello);
 // write your routes
 router.get("/courses", controllers.getCourses);
 router.post("/courses", controllers.addCourse);
+router.get("/course/:id", controllers.getCourse);
 
 module.exports = router;
