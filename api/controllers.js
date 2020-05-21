@@ -46,9 +46,9 @@ const controllers = {
       };
       courses.push(newCourse);
 
-      res.send(newCourse);
       const json = JSON.stringify(courses, null, "");
       await writeFile(DATA_DIR, json);
+      res.send(newCourse);
     } catch (error) {
       res.status(500).send("Something went wrong");
     }
@@ -66,6 +66,31 @@ const controllers = {
       }
       res.json(courseFiltered);
     } catch (error) {
+      res.status(500).send("Something went wrong");
+    }
+  },
+  modifyCourse: async (req, res) => {
+    try {
+      const { error } = validateCourse(req.body); //object destructuring
+      if (error) {
+        res.status(400).send(error.details[0].message);
+        return;
+      }
+      const description = req.body.description;
+      const name = req.body.name;
+
+      const id = parseInt(req.params.id);
+      const content = await readFile(DATA_DIR, "utf-8");
+      const courses = JSON.parse(content);
+      const courseFiltered = courses.find((course) => course.id === id);
+      courseFiltered.description = description;
+      courseFiltered.name = name;
+      const json = JSON.stringify(courses, null, "");
+      await writeFile(DATA_DIR, json);
+
+      res.json(courseFiltered);
+    } catch (error) {
+      console.log(error);
       res.status(500).send("Something went wrong");
     }
   },
