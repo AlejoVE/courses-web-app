@@ -7,5 +7,6 @@ router.get("/", controllers.hello);
 
 // write your routes
 router.get("/courses", controllers.getCourses);
+router.post("/courses", controllers.addCourse);
 
 module.exports = router;
