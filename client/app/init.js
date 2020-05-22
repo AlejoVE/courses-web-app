@@ -19,6 +19,13 @@ document.getElementById("save-button").addEventListener("click", (e) => {
   handlers.saveCourse(courseNameToSave, courseDescriptionToSave);
 });
 
+document.getElementById("modify-button").addEventListener("click", () => {
+  const courseNameToSave = document.getElementById("course-name").value;
+  const courseDescriptionToSave = document.getElementById("Course-content")
+    .value;
+  handlers.modifyCourse(courseNameToSave, courseDescriptionToSave);
+});
+
 // fetch("/files")
 //   .then((res) => {
 //     if (!res.ok) {

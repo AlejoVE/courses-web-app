@@ -63,6 +63,43 @@ const handlers = {
       console.log(error);
     }
   },
+  modifyCourse: async (courseName, courseDescription) => {
+    try {
+      const res = await fetch("/api/courses");
+      const data = await res.json();
+      const courses = data.courses;
+      const courseFiltered = courses.find(
+        (course) => course.name === courseName
+      );
+
+      //   if (courseFiltered.id === undefined) {
+      //     alert("please introduce the name of the course");
+      //     return;
+      //   }
+
+      const resPut = await fetch("/api/courses/" + courseFiltered.id, {
+        method: "PUT",
+        body: JSON.stringify({
+          name: courseName,
+          description: courseDescription,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      if (resPut.status === 400) {
+        alert(
+          "The course needs a name and a description of at least 10 characters"
+        );
+        return;
+      }
+      renderFilesList(courses);
+      loadFileToEditor(courseName, courseDescription);
+      alert("changes saved");
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 // const deleteFile = (fileName) => {
