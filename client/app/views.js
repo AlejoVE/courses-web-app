@@ -3,7 +3,7 @@ const renderFilesList = (filesArr) => {
     .map((fileName) => {
       const loadButton = document.createElement("button");
       loadButton.innerHTML = fileName.name;
-      loadButton.onclick = () => handlers.fetchAndLoadFile(fileName);
+      loadButton.onclick = () => handlers.fetchAndLoadCourse(fileName);
 
       const deleteButton = document.createElement("button");
       deleteButton.innerHTML = "X";

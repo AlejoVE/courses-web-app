@@ -1,5 +1,5 @@
 const handlers = {
-  fetchAndLoadFile: async (file) => {
+  fetchAndLoadCourse: async (file) => {
     try {
       console.log("this is filename", file);
       const res = await fetch("/api/courses");
