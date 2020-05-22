@@ -27,5 +27,5 @@ const renderFilesList = (filesArr) => {
 
 const loadFileToEditor = (name, text) => {
   document.getElementById("course-name").value = name;
-  document.getElementById("Course-content").value = text;
+  document.getElementById("course-description").value = text;
 };

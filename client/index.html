@@ -16,32 +16,26 @@
     <main class="container">
       <section class="courses">
         <form id="save-form">
+          <h3>Course name:</h3>
           <input id="course-name" name="courseName" placeholder="Course name" />
           <br />
+          <h3>Course description:</h3>
           <textarea
             id="course-description"
             name="CourseDescription"
             form="save-form"
-            placeholder="Description"
+            rows="4"
+            cols="50"
           ></textarea>
           <br />
-          <button id="save-button">save file</button>
+          <button id="save-button">save course</button>
+          <button id="modify-button">Modify description</button>
         </form>
-        <details open>
-          <summary>open a file</summary>
+        <details close>
+          <summary>see courses</summary>
           <div id="course-list-container"></div>
         </details>
       </section>
-      <div class="content">
-        <textarea
-          name="course-content"
-          id="Course-content"
-          cols="30"
-          rows="10"
-        ></textarea
-        ><br />
-        <button id="modify-button">Modify</button>
-      </div>
     </main>
     <script src="./app/actions.js"></script>
     <script src="./app/views.js"></script>

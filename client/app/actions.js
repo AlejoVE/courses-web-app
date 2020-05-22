@@ -65,6 +65,10 @@ const handlers = {
   },
   modifyCourse: async (courseName, courseDescription) => {
     try {
+      if (courseName === "") {
+        alert("name input cannot be empty");
+        return;
+      }
       const res = await fetch("/api/courses");
       const data = await res.json();
       const courses = data.courses;
@@ -72,10 +76,12 @@ const handlers = {
         (course) => course.name === courseName
       );
 
-      //   if (courseFiltered.id === undefined) {
-      //     alert("please introduce the name of the course");
-      //     return;
-      //   }
+      if (courseFiltered === undefined) {
+        alert(
+          "Sorry, you cannot modify the name, save a new course instead (We are working on that function)"
+        );
+        return;
+      }
 
       const resPut = await fetch("/api/courses/" + courseFiltered.id, {
         method: "PUT",
