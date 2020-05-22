@@ -3,10 +3,9 @@ export const init = async () => {
     const res = await fetch("/api/courses");
     const data = await res.json();
     const courses = data.courses;
-    console.log(courses);
-    renderFilesList(data.courses);
+    renderFilesList(courses);
     if (courses.length > 0) {
-      loadFileToEditor(courses[0], courses[0].description);
+      loadFileToEditor(courses[0].name, courses[0].description);
     }
   } catch (error) {
     console.log(error);
