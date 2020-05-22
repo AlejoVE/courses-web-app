@@ -49,31 +49,21 @@ const handlers = {
       console.log(error);
     }
   },
+  deleteCourse: async (course) => {
+    try {
+      await fetch("/api/courses/" + course.id, {
+        method: "DELETE",
+      });
+      const res = await fetch("/api/courses");
+      const data = await res.json();
+      const courses = data.courses;
+      renderFilesList(courses);
+      alert("file is deleted");
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
-
-// const saveFile = (fileName, fileText) => {
-//   fetch("/files/" + fileName, {
-//     method: "POST",
-//     body: JSON.stringify({ text: fileText }),
-//     headers: {
-//       "Content-type": "application/json; charset=UTF-8",
-//     },
-//   })
-//     .then((res) => {
-//       if (!res.ok) {
-//         throw res;
-//       }
-//       return res.json();
-//     })
-//     .then((filesList) => {
-//       renderFilesList(filesList);
-//       alert("your changes are saved");
-//     })
-//     .catch((err) => {
-//       alert("unable to save your changes");
-//       console.error(err);
-//     });
-// };
 
 // const deleteFile = (fileName) => {
 //   fetch("/files/" + fileName, {

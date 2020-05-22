@@ -7,7 +7,7 @@ const renderFilesList = (filesArr) => {
 
       const deleteButton = document.createElement("button");
       deleteButton.innerHTML = "X";
-      deleteButton.onclick = () => deleteFile(fileName);
+      deleteButton.onclick = () => handlers.deleteCourse(fileName);
 
       const li = document.createElement("li");
       li.appendChild(loadButton);
