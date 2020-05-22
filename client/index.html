@@ -17,15 +17,16 @@
       <section class="courses">
         <form id="save-form">
           <input id="course-name" name="courseName" placeholder="Course name" />
+          <br />
+          <textarea
+            id="course-description"
+            name="CourseDescription"
+            form="save-form"
+            placeholder="Description"
+          ></textarea>
+          <br />
+          <button id="save-button">save file</button>
         </form>
-        <textarea
-          id="course-description"
-          name="CourseDescription"
-          form="save-form"
-          placeholder="Description"
-        ></textarea>
-        <br />
-        <button id="save-button">save file</button>
         <details open>
           <summary>open a file</summary>
           <div id="course-list-container"></div>

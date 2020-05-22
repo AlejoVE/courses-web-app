@@ -12,6 +12,13 @@ export const init = async () => {
   }
 };
 
+document.getElementById("save-button").addEventListener("click", (e) => {
+  e.preventDefault();
+  const courseNameToSave = e.target.form.courseName.value;
+  const courseDescriptionToSave = e.target.form.CourseDescription.value;
+  handlers.saveCourse(courseNameToSave, courseDescriptionToSave);
+});
+
 // fetch("/files")
 //   .then((res) => {
 //     if (!res.ok) {
@@ -26,10 +33,3 @@ export const init = async () => {
 //     }
 //   })
 //   .catch((err) => console.error(err));
-
-// document.getElementById("save-button").addEventListener("click", (e) => {
-//   const fileNameToSave = e.target.form.fileName.value;
-//   const fileTextToSave = e.target.form.fileText.value;
-//   saveFile(fileNameToSave, fileTextToSave);
-//   e.preventDefault();
-// });

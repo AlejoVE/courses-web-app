@@ -1,7 +1,6 @@
 const handlers = {
   fetchAndLoadCourse: async (file) => {
     try {
-      console.log("this is filename", file);
       const res = await fetch("/api/courses");
       const data = await res.json();
       const courses = data.courses;
@@ -13,10 +12,44 @@ const handlers = {
       console.log(error);
     }
   },
+  saveCourse: async (courseName, courseDescription) => {
+    try {
+      const res = await fetch("/api/courses");
+      const data = await res.json();
+      const courses = data.courses;
+      const exists = courses.find((course) => course.name === courseName);
+      if (exists) {
+        alert(
+          `The course "${courseName}" already exists. Press the modify button if you only want to change the description.`
+        );
+        return;
+      }
+      const resPost = await fetch("/api/courses", {
+        method: "POST",
+        body: JSON.stringify({
+          name: courseName,
+          description: courseDescription,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      if (resPost.status === 400) {
+        alert(
+          "You must enter a name and a valid description ( min 10 characters)"
+        );
+        return;
+      }
+      const newRes = await fetch("/api/courses");
+      const newData = await newRes.json();
+      const newCourses = newData.courses;
+      renderFilesList(newCourses);
+      alert("your  new course is  saved");
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
-
-//     .then((fileData) => loadFileToEditor(fileData.name, fileData.text))
-//     .catch((err) => console.error(err));
 
 // const saveFile = (fileName, fileText) => {
 //   fetch("/files/" + fileName, {
